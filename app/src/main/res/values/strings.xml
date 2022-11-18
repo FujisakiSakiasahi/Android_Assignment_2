@@ -10,4 +10,10 @@
     <string name="setting">Settings</string>
     <string name="scoreboard">Scoreboard</string>
     <string name="taktauyet">Tak tau yet</string>
+
+    <!--for custom dialog: output result-->
+    <string name="output_score">Your Score is %1$d</string>
+    <string name="output_hint">Enter your name to save the score</string>
+    <string name="output_save">Save</string>
+    <string name="output_cancel">Cancel</string>
 </resources>
