@@ -1,8 +1,13 @@
 <resources>
     <string name="app_name">Time Fighter</string>
 
+    <!--for main activity-->
     <string name="button_click">Click Me!</string>
     <string name="score">Your Score: %1$d</string>
     <string name="time_left">Time left: %1$d</string>
 
+    <!--for menu-->
+    <string name="setting">Setting</string>
+    <string name="scoreboard">Scoreboard</string>
+    <string name="taktauyet">Tak tau yet</string>
 </resources>
