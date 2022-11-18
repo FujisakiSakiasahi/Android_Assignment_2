@@ -12,12 +12,13 @@ import android.widget.Toast;
 import com.example.assignment2.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
-    private ActivityMainBinding binding;
+    private ActivityMainBinding binding = null;
 
     private int score = 0;
     private boolean gameStarted = false;
     private CountDownTimer timer;
     private final long INIT_COUNT = 60000; //60 seconds
+    private long remaining_time = INIT_COUNT;
     private final long INTERVAL = 1000; //1 second
 
     @Override
@@ -28,12 +29,20 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.buttonClick.setOnClickListener(view -> {
-            incrementScore();
-        });
+        binding.buttonClick.setOnClickListener(view -> incrementScore());
 
-        resetGame();
+        if (!gameStarted) {
+            resetGame();
+        }
 
+    }
+
+    public void saveScore(String name){
+
+    }
+
+    public int getScore(){
+        return score;
     }
 
     private void incrementScore(){
@@ -54,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void resetGame(){
         score = 0;
+        remaining_time = INIT_COUNT;
 
         String text = getString(R.string.score, score);
         binding.textScore.setText(text);
@@ -63,12 +73,13 @@ public class MainActivity extends AppCompatActivity {
 
         gameStarted = false;
 
-        timer = new CountDownTimer(INIT_COUNT, INTERVAL) {
+        timer = new CountDownTimer(remaining_time, INTERVAL) {
             @Override
             public void onTick(long l) {
                 int second = (int) l / 1000;
                 String timeLeft = getString(R.string.time_left, second);
                 binding.textTime.setText(timeLeft);
+                remaining_time = l;
             }
 
             @Override
@@ -80,7 +91,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void endGame(){
-        Toast.makeText(this, "Game Ended", Toast.LENGTH_LONG).show();
+        DisplayScore dialog = new DisplayScore();
+        dialog.show(getSupportFragmentManager(), "ShowDialog");
 
         resetGame();
     }
@@ -108,5 +120,44 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putBoolean("START", gameStarted);
+        outState.putLong("TIME_LEFT", remaining_time);
+        outState.putInt("SCORE", score);
+
+
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        gameStarted = savedInstanceState.getBoolean("START");
+        score = savedInstanceState.getInt("SCORE");
+        remaining_time = savedInstanceState.getLong("TIME_LEFT");
+
+        String text = getString(R.string.score, score);
+        binding.textScore.setText(text);
+
+        timer = new CountDownTimer(remaining_time, INTERVAL) {
+            @Override
+            public void onTick(long l) {
+                int second = (int) l / 1000;
+                String timeLeft = getString(R.string.time_left, second);
+                binding.textTime.setText(timeLeft);
+                remaining_time = l;
+            }
+
+            @Override
+            public void onFinish() {
+                endGame();
+            }
+        }.start();
+
     }
 }
