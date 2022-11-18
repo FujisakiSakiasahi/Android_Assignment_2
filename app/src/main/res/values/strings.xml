@@ -7,7 +7,7 @@
     <string name="time_left">Time left: %1$d</string>
 
     <!--for menu-->
-    <string name="setting">Setting</string>
+    <string name="setting">Settings</string>
     <string name="scoreboard">Scoreboard</string>
     <string name="taktauyet">Tak tau yet</string>
 </resources>
