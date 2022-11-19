@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -89,7 +90,11 @@ public class MainActivity extends AppCompatActivity {
     private void endGame(){
         DisplayScore dialog = new DisplayScore();
         dialog.setScore(score);
-        dialog.show(getSupportFragmentManager(), "ShowDialog");
+        if(!getSupportFragmentManager().isDestroyed()){
+            dialog.show(getSupportFragmentManager(), "ShowDialog");
+        }else{
+            Log.d("Error", "Fragment Manager was destroyed");
+        }
 
         resetGame();
     }
