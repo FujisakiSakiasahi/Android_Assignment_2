@@ -33,9 +33,9 @@ public class MainActivity extends AppCompatActivity {
 
         if (!gameStarted) {
             resetGame();
-        }
+        }//end if
 
-    }
+    }//end onCreate
 
     public void saveScore(String name){
 
@@ -144,20 +144,21 @@ public class MainActivity extends AppCompatActivity {
         String text = getString(R.string.score, score);
         binding.textScore.setText(text);
 
-        timer = new CountDownTimer(remaining_time, INTERVAL) {
-            @Override
-            public void onTick(long l) {
-                int second = (int) l / 1000;
-                String timeLeft = getString(R.string.time_left, second);
-                binding.textTime.setText(timeLeft);
-                remaining_time = l;
-            }
+        if(gameStarted){
+            timer = new CountDownTimer(remaining_time, INTERVAL) {
+                @Override
+                public void onTick(long l) {
+                    int second = (int) l / 1000;
+                    String timeLeft = getString(R.string.time_left, second);
+                    binding.textTime.setText(timeLeft);
+                    remaining_time = l;
+                }
 
-            @Override
-            public void onFinish() {
-                endGame();
-            }
-        }.start();
-
+                @Override
+                public void onFinish() {
+                    endGame();
+                }
+            }.start();
+        }
     }
 }
