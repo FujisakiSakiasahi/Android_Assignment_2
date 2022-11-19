@@ -41,10 +41,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public int getScore(){
-        return score;
-    }
-
     private void incrementScore(){
 
         if (!gameStarted) startGame();
@@ -92,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void endGame(){
         DisplayScore dialog = new DisplayScore();
+        dialog.setScore(score);
         dialog.show(getSupportFragmentManager(), "ShowDialog");
 
         resetGame();

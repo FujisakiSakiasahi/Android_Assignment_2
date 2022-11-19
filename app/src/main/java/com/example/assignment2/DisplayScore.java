@@ -14,6 +14,12 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
 public class DisplayScore extends DialogFragment {
+    private int score;
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -26,7 +32,7 @@ public class DisplayScore extends DialogFragment {
         View display_score = inflater.inflate(R.layout.display_score, null);
 
         final TextView text_outputscore = display_score.findViewById(R.id.text_outputscore);
-        text_outputscore.setText(getString(R.string.output_score, mainActivity.getScore()));
+        text_outputscore.setText(getString(R.string.output_score, score));
 
         final Button button_cancel = display_score.findViewById(R.id.button_cancel);
         button_cancel.setOnClickListener(view -> {
