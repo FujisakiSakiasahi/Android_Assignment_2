@@ -3,7 +3,7 @@
 
     <!--for main activity-->
     <string name="button_click">Click Me!</string>
-    <string name="score">Your Score: %1$d</string>
+    <string name="score">%1$d</string>
     <string name="time_left">Time left: %1$d</string>
 
     <!--for menu-->
