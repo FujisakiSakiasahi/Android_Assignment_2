@@ -32,7 +32,7 @@ public class DisplayScore extends DialogFragment {
         View display_score = inflater.inflate(R.layout.display_score, null);
 
         final TextView text_outputscore = display_score.findViewById(R.id.text_outputscore);
-        text_outputscore.setText(getString(R.string.output_score, score));
+        text_outputscore.setText(score);
 
         final Button button_cancel = display_score.findViewById(R.id.button_cancel);
         button_cancel.setOnClickListener(view -> {

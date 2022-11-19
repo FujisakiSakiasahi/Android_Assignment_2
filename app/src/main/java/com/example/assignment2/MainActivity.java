@@ -12,15 +12,24 @@ import android.widget.Toast;
 
 import com.example.assignment2.databinding.ActivityMainBinding;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
+import java.util.Scanner;
+
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding = null;
 
     private int score = 0;
     private boolean gameStarted = false;
     private CountDownTimer timer;
-    private final long INIT_COUNT = 60000; //60 seconds
+    private final long INIT_COUNT = 10000; //60 seconds
     private long remaining_time = INIT_COUNT;
     private final long INTERVAL = 1000; //1 second
+
+    public final static String SCORE_FILE_NAME = "score.txt";
+    ScoreList scoreList = new ScoreList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        loadScoreList();
+
         binding.buttonClick.setOnClickListener(view -> incrementScore());
 
         if (!gameStarted) {
@@ -38,7 +49,52 @@ public class MainActivity extends AppCompatActivity {
 
     }//end onCreate
 
-    public void saveScore(String name){
+    @Override
+    protected void onStop() {
+        super.onStop();
+        saveScoreList();
+    }
+
+    public void loadScoreList(){
+        try {
+            FileInputStream fis = openFileInput(SCORE_FILE_NAME);
+            Scanner sc = new Scanner(fis);
+
+            while(sc.hasNextLine()){
+                String[] record = sc.nextLine().split("\\s+");
+                scoreList.addScore(Integer.parseInt(record[1]), record[0]);
+            }
+
+            sc.close();
+            fis.close();
+        }catch (FileNotFoundException e){
+            Log.d("Error", "No data found");
+        }catch (Exception e){
+            Log.d("Error", e.getLocalizedMessage());
+        }
+    }
+
+    public void saveScore(String name){ //save score into ScoreList object
+        scoreList.addScore(score, name);
+    }
+
+    public void saveScoreList(){
+        try {
+            FileOutputStream fos = openFileOutput(SCORE_FILE_NAME, MODE_PRIVATE);
+
+            PrintStream ps = new PrintStream(fos);
+
+            for (int i = 0 ; i < 10 ; i++) {
+                ps.println(scoreList.getName(i) + " " + scoreList.getScore(i));
+            }
+
+            fos.close();
+            ps.close();
+        } catch (FileNotFoundException e) {
+            Log.d("Error", "File is missing");
+        } catch (Exception e){
+            Log.d("Error", e.getLocalizedMessage());
+        }
 
     }
 
@@ -88,13 +144,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void endGame(){
-        DisplayScore dialog = new DisplayScore();
-        dialog.setScore(score);
-        if(!getSupportFragmentManager().isDestroyed()){
-            dialog.show(getSupportFragmentManager(), "ShowDialog");
-        }else{
-            Log.d("Error", "Fragment Manager was destroyed");
-        }
+//        DisplayScore dialog = new DisplayScore();
+//        dialog.setScore(score);
+//        if(!getSupportFragmentManager().isDestroyed()){
+//            dialog.show(getSupportFragmentManager(), "ShowDialog");
+//        }else{
+//            Log.d("Error", "Fragment Manager was destroyed");
+//        }
+        //for debug purpose as the custom dialog crash the app
+        saveScore("test2");
 
         resetGame();
     }
@@ -117,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
 
                 break;
             case R.id.menu_taktaulagi:
-
+                Toast.makeText(getApplicationContext(), scoreList.getName(1)+" "+scoreList.getScore(1), Toast.LENGTH_SHORT).show();
                 break;
         }
 
