@@ -3,12 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-<<<<<<< Updated upstream
-        <entry key="..\:/Users/USER/AndroidStudioProjects/Android_Assignment_2/app/src/main/res/layout/activity_main.xml" value="0.6" />
-        <entry key="..\:/Users/jhunk/AndroidStudioProjects/Android_Assignment_2/app/src/main/res/layout/activity_main.xml" value="0.26313405797101447" />
-=======
-        <entry key="..\:/Users/TAN/Desktop/mobile tech/Assignment/Assignment2/app/src/main/res/layout/activity_main.xml" value="0.33" />
->>>>>>> Stashed changes
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Android_Assignment_2/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Android_Assignment_2/app/src/main/res/layout/display_score.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Android_Assignment_2/app/src/main/res/layout/leaderboard.xml" value="0.264" />
       </map>
     </option>
   </component>

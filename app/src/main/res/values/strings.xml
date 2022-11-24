@@ -17,6 +17,10 @@
     <string name="output_save">Save</string>
     <string name="output_cancel">Cancel</string>
 
+    <!--for leaderboard-->
+    <string name="highscore">Leaderboard</string>
+    <string name="recent_score">Show Recent Scores</string>
+
     <!--for setting layout-->
     <string name="setting_splash_screen">Skip splash screen</string>
     <string name="setting_button_cancel">Cancel</string>

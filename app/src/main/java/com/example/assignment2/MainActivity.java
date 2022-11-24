@@ -41,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
 
         loadScoreList();
 
+
+
         binding.buttonClick.setOnClickListener(view -> incrementScore());
 
         if (!gameStarted) {
