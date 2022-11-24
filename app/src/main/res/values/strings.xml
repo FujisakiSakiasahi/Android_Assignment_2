@@ -16,4 +16,10 @@
     <string name="output_hint">Enter your name to save the score</string>
     <string name="output_save">Save</string>
     <string name="output_cancel">Cancel</string>
+
+    <!--for setting layout-->
+    <string name="setting_splash_screen">Skip splash screen</string>
+    <string name="setting_button_cancel">Cancel</string>
+    <string name="setting_button_set_default">Set Default</string>
+    <string name="setting_button_save">Save</string>
 </resources>
