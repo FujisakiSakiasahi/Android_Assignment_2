@@ -3,7 +3,7 @@ package com.example.assignment2;
 import java.util.List;
 import java.util.ArrayList;
 
-public class ScoreList { //currently use the recent 10 record
+public class ScoreList {
     private List<Score> recentScoreList = new ArrayList<Score>();
     private List<Score> topScoreList = new ArrayList<Score>();
 
@@ -30,5 +30,9 @@ public class ScoreList { //currently use the recent 10 record
             return recentScoreList.get(index).getName();
         }
         return "RECORD NOT FOUND";
+    }
+
+    public int getLength(){
+        return recentScoreList.size();
     }
 }

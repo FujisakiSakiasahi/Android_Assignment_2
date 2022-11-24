@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.assignment2.databinding.ActivityMainBinding;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -20,6 +21,7 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
+    //binding declaration
     private ActivityMainBinding binding = null;
 
     private int score = 0;
@@ -38,13 +40,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //binding declaration
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        //initialize the file handler
         fileHandler = new FileHandler(getApplicationContext(), SCORE_FILE_NAME);
 
+        //load the score list
         loadScoreList();
 
+        //game function piece
         binding.buttonClick.setOnClickListener(view -> incrementScore());
 
         if (!gameStarted) {
@@ -60,11 +66,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void loadScoreList(){
-//        for (int i = 0; i<fileHandler.loadData().length;i++){
-//            String[] record = fileHandler.loadData()[i].split("\\s+");
-//            scoreList.addScore(Integer.parseInt(record[1]), record[0]);
-//        }
-//        fileHandler.loadData();
+        if (new File(getApplicationContext().getFilesDir(), SCORE_FILE_NAME).exists()){
+            int dataArrayLength = fileHandler.loadData().length;
+
+            for (int i = 0; i < dataArrayLength; i++){
+                String[] record = fileHandler.loadData()[i].split(", ");
+                scoreList.addScore(Integer.parseInt(record[1]), record[0]);
+            }
+        }else{
+            saveScoreList();
+        }
+
+
 
 //        try {
 //            FileInputStream fis = openFileInput(SCORE_FILE_NAME);
@@ -89,18 +102,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void saveScoreList(){
-//        //create string array that need to be saved
-//        String[] saveString = new String[1];
-//
-//        for (int i = 0 ; i < 10 ; i++) {
-//            ps.println(scoreList.getName(i) + " " + scoreList.getScore(i));}
-//
-//        //add item into string array
-//        saveString[0] = "Skip Splash Screen = " + settingBinding.checkboxSplashScreen.isChecked();
-//
-//        //save the setting status
-//        fileHandler.setData(saveString);
-//        fileHandler.saveData();
+        //create string array that need to be saved
+        String[] saveString = new String[scoreList.getLength()];
+
+        for (int i = 0 ; i < 10 ; i++) {
+            if(scoreList.getScore(i) != -1){
+                //add item into string array
+                saveString[i] = scoreList.getName(i) + ", " + scoreList.getScore(i);
+            }else{
+                break;
+            }
+        }
+
+        //save the setting status
+        fileHandler.setData(saveString);
+        fileHandler.saveData();
 
 
 //        try {
@@ -130,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
         String text = getString(R.string.score, score);
         binding.textScore.setText(text);
 
-    }
+    }//end of incrementScore
 
     private void startGame() {
         timer.start();
