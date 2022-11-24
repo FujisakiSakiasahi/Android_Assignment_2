@@ -3,6 +3,7 @@ package com.example.assignment2;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -28,7 +29,8 @@ public class MainActivity extends AppCompatActivity {
     private long remaining_time = INIT_COUNT;
     private final long INTERVAL = 1000; //1 second
 
-    public final static String SCORE_FILE_NAME = "score.txt";
+    private final static String SCORE_FILE_NAME = "score.txt";
+    private FileHandler fileHandler;
     ScoreList scoreList = new ScoreList();
 
     @Override
@@ -39,9 +41,9 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        fileHandler = new FileHandler(getApplicationContext(), SCORE_FILE_NAME);
+
         loadScoreList();
-
-
 
         binding.buttonClick.setOnClickListener(view -> incrementScore());
 
@@ -58,22 +60,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void loadScoreList(){
-        try {
-            FileInputStream fis = openFileInput(SCORE_FILE_NAME);
-            Scanner sc = new Scanner(fis);
-
-            while(sc.hasNextLine()){
-                String[] record = sc.nextLine().split("\\s+");
-                scoreList.addScore(Integer.parseInt(record[1]), record[0]);
-            }
-
-            sc.close();
-            fis.close();
-        }catch (FileNotFoundException e){
-            Log.d("Error", "No data found");
-        }catch (Exception e){
-            Log.d("Error", e.getLocalizedMessage());
+        for (int i = 0; i<fileHandler.loadData().length;i++){
+            String[] record = fileHandler.loadData()[i].split("\\s+");
+            scoreList.addScore(Integer.parseInt(record[1]), record[0]);
         }
+        fileHandler.loadData();
+
+//        try {
+//            FileInputStream fis = openFileInput(SCORE_FILE_NAME);
+//            Scanner sc = new Scanner(fis);
+//
+//            while(sc.hasNextLine()){
+//                String[] record = sc.nextLine().split("\\s+");
+//                scoreList.addScore(Integer.parseInt(record[1]), record[0]);
+//            }
+//
+//            sc.close();
+//            fis.close();
+//        }catch (FileNotFoundException e){
+//            Log.d("Error", "No data found");
+//        }catch (Exception e){
+//            Log.d("Error", e.getLocalizedMessage());
+//        }
     }
 
     public void saveScore(String name){ //save score into ScoreList object
@@ -81,23 +89,36 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void saveScoreList(){
-        try {
-            FileOutputStream fos = openFileOutput(SCORE_FILE_NAME, MODE_PRIVATE);
+//        //create string array that need to be saved
+//        String[] saveString = new String[1];
+//
+//        for (int i = 0 ; i < 10 ; i++) {
+//            ps.println(scoreList.getName(i) + " " + scoreList.getScore(i));}
+//
+//        //add item into string array
+//        saveString[0] = "Skip Splash Screen = " + settingBinding.checkboxSplashScreen.isChecked();
+//
+//        //save the setting status
+//        fileHandler.setData(saveString);
+//        fileHandler.saveData();
 
-            PrintStream ps = new PrintStream(fos);
 
-            for (int i = 0 ; i < 10 ; i++) {
-                ps.println(scoreList.getName(i) + " " + scoreList.getScore(i));
-            }
-
-            fos.close();
-            ps.close();
-        } catch (FileNotFoundException e) {
-            Log.d("Error", "File is missing");
-        } catch (Exception e){
-            Log.d("Error", e.getLocalizedMessage());
-        }
-
+//        try {
+//            FileOutputStream fos = openFileOutput(SCORE_FILE_NAME, MODE_PRIVATE);
+//
+//            PrintStream ps = new PrintStream(fos);
+//
+//            for (int i = 0 ; i < 10 ; i++) {
+//                ps.println(scoreList.getName(i) + " " + scoreList.getScore(i));
+//            }
+//
+//            fos.close();
+//            ps.close();
+//        } catch (FileNotFoundException e) {
+//            Log.d("Error", "File is missing");
+//        } catch (Exception e){
+//            Log.d("Error", e.getLocalizedMessage());
+//        }
     }
 
     private void incrementScore(){
@@ -169,18 +190,19 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        Intent intent = null;
         switch (item.getItemId()){
             case R.id.menu_setting:
-
+                 intent = new Intent(getApplicationContext(), SettingActivity.class);
                 break;
             case R.id.menu_scoreboard:
-
+                //intent = new Intent(getApplicationContext(), SettingActivity.class);
                 break;
             case R.id.menu_taktaulagi:
-                Toast.makeText(getApplicationContext(), scoreList.getName(1)+" "+scoreList.getScore(1), Toast.LENGTH_SHORT).show();
+                //intent = new Intent(getApplicationContext(), SettingActivity.class);
                 break;
         }
-
+        startActivity(intent);
         return super.onOptionsItemSelected(item);
     }
 
