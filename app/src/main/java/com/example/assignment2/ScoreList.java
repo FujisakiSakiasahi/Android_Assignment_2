@@ -1,35 +1,33 @@
 package com.example.assignment2;
 
+import java.util.List;
+import java.util.ArrayList;
+
 public class ScoreList { //currently use the recent 10 record
-    private static int recordCount = 0;
-    private int[] scoreList = new int[10];
-    private String[] nameList = new String[10];
+    private List<Score> recentScoreList = new ArrayList<Score>();
+    private List<Score> topScoreList = new ArrayList<Score>();
 
     public void addScore(int score, String name) {
-        if(recordCount < 10){
-            this.scoreList[recordCount] = score;
-            this.nameList[recordCount] = name;
-            recordCount++;
-        }else{
-            for (int i = 0 ; i < 9 ; i++){
-                this.scoreList[i] = this.scoreList[i+1];
-                this.nameList[i] = this.nameList[i+1];
-            }
-            this.scoreList[recordCount] = score;
-            this.nameList[recordCount] = name;
+        Score score0 = new Score(score, name);
+
+        recentScoreList.add(0, score0);
+
+        if (recentScoreList.size() > 10) {
+            recentScoreList.remove(9);
         }
+
     }
 
     public int getScore(int index) {
-        if(index+1 <= recordCount){
-            return scoreList[index];
+        if(index+1 <= recentScoreList.size()){
+            return recentScoreList.get(index).getScore();
         }
         return -1;
     }
 
     public String getName(int index) {
-        if(index+1 <= recordCount){
-            return nameList[index];
+        if(index+1 <= recentScoreList.size()){
+            return recentScoreList.get(index).getName();
         }
         return "RECORD NOT FOUND";
     }
