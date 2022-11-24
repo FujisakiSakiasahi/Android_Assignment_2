@@ -76,25 +76,6 @@ public class MainActivity extends AppCompatActivity {
         }else{
             saveScoreList();
         }
-
-
-
-//        try {
-//            FileInputStream fis = openFileInput(SCORE_FILE_NAME);
-//            Scanner sc = new Scanner(fis);
-//
-//            while(sc.hasNextLine()){
-//                String[] record = sc.nextLine().split("\\s+");
-//                scoreList.addScore(Integer.parseInt(record[1]), record[0]);
-//            }
-//
-//            sc.close();
-//            fis.close();
-//        }catch (FileNotFoundException e){
-//            Log.d("Error", "No data found");
-//        }catch (Exception e){
-//            Log.d("Error", e.getLocalizedMessage());
-//        }
     }
 
     public void saveScore(String name){ //save score into ScoreList object
@@ -117,24 +98,6 @@ public class MainActivity extends AppCompatActivity {
         //save the setting status
         fileHandler.setData(saveString);
         fileHandler.saveData();
-
-
-//        try {
-//            FileOutputStream fos = openFileOutput(SCORE_FILE_NAME, MODE_PRIVATE);
-//
-//            PrintStream ps = new PrintStream(fos);
-//
-//            for (int i = 0 ; i < 10 ; i++) {
-//                ps.println(scoreList.getName(i) + " " + scoreList.getScore(i));
-//            }
-//
-//            fos.close();
-//            ps.close();
-//        } catch (FileNotFoundException e) {
-//            Log.d("Error", "File is missing");
-//        } catch (Exception e){
-//            Log.d("Error", e.getLocalizedMessage());
-//        }
     }
 
     private void incrementScore(){
