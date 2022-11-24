@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.assignment2.databinding.SettingBinding;
 
+import java.io.File;
+
 public class SettingActivity extends AppCompatActivity {
     private SettingBinding settingBinding = null;
 
@@ -21,31 +23,44 @@ public class SettingActivity extends AppCompatActivity {
         settingBinding = SettingBinding.inflate(getLayoutInflater());
         setContentView(settingBinding.getRoot());
 
-        //load data setting
+        //initialize the file handler
         fileHandler = new FileHandler(getApplicationContext(), SETTING_FILE_NAME);
-        setCurrentSettingStatus(fileHandler.loadData());
+
+        //check if the setting status file is created or not
+        //if exists load status else create file
+        checkSettingStatusFile();
 
         settingBinding.buttonSettingSetDefault.setOnClickListener(view -> {
-            //set the settings view into default setting status
-            settingBinding.checkboxSplashScreen.setChecked(false);
-
-            //create string array that need to be saved
-            String[] saveString = new String[1];
-
-            savingSettingStatus(saveString);
+            setDefaultSettingStatus();
+            savingSettingStatus();
         });
 
         settingBinding.buttonSettingSave.setOnClickListener(view -> {
-            //create string array that need to be saved
-            String[] saveString = new String[1];
-
-            savingSettingStatus(saveString);
+            savingSettingStatus();
         });
 
         settingBinding.buttonSettingCancel.setOnClickListener(view -> finish());
+    }//end of onCreate
+
+    private void setDefaultSettingStatus() {
+        //set the settings view into default setting status
+        settingBinding.checkboxSplashScreen.setChecked(false);
     }
 
-    private void savingSettingStatus(String[] saveString) {
+    private void checkSettingStatusFile() {
+        if(new File(getApplicationContext().getFilesDir(), SETTING_FILE_NAME).exists()){
+            //load data setting
+            setCurrentSettingStatus(fileHandler.loadData());
+        }else{
+            setDefaultSettingStatus();
+            savingSettingStatus();
+        }
+    }
+
+    private void savingSettingStatus() {
+        //create string array that need to be saved
+        String[] saveString = new String[1];
+
         //add item into string array
         saveString[0] = "Skip Splash Screen = " + settingBinding.checkboxSplashScreen.isChecked();
 

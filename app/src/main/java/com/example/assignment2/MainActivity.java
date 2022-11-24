@@ -60,11 +60,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void loadScoreList(){
-        for (int i = 0; i<fileHandler.loadData().length;i++){
-            String[] record = fileHandler.loadData()[i].split("\\s+");
-            scoreList.addScore(Integer.parseInt(record[1]), record[0]);
-        }
-        fileHandler.loadData();
+//        for (int i = 0; i<fileHandler.loadData().length;i++){
+//            String[] record = fileHandler.loadData()[i].split("\\s+");
+//            scoreList.addScore(Integer.parseInt(record[1]), record[0]);
+//        }
+//        fileHandler.loadData();
 
 //        try {
 //            FileInputStream fis = openFileInput(SCORE_FILE_NAME);

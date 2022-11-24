@@ -21,7 +21,7 @@ public class FileHandler {
 
     public FileHandler(Context context, String fileName){
         this.fileName = fileName;
-        this.data = null;
+        this.data = new ArrayList<String>();
         this.context = context;
     }
 
