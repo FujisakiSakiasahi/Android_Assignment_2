@@ -21,6 +21,10 @@
     <string name="highscore">Leaderboard</string>
     <string name="recent_score">Show Recent Scores</string>
 
+    <!--for recent scores-->
+    <string name="recent">Recent Scores</string>
+    <string name="back_button">Back Button</string>
+
     <!--for setting layout-->
     <string name="setting_splash_screen">Skip splash screen</string>
     <string name="setting_button_cancel">Cancel</string>
