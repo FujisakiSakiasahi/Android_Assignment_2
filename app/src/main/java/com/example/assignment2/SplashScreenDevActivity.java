@@ -5,9 +5,7 @@ import android.os.CountDownTimer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.Timer;
-
-public class splash_screen_activity extends AppCompatActivity {
+public class SplashScreenDevActivity extends AppCompatActivity {
 
     private final long INIT_COUNT = 5000; //5 seconds
     private long remaining_time = INIT_COUNT;
@@ -15,7 +13,7 @@ public class splash_screen_activity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.splash_screen);
+        setContentView(R.layout.splash_screen_dev);
 
 
 

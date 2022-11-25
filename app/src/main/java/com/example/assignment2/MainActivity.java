@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -40,10 +39,14 @@ public class MainActivity extends AppCompatActivity {
         String[] a = fileHandler.loadData();
         String[] b = a[0].split( " = " );
 
-        if(!Boolean.parseBoolean(b[1]) && !started){ // calls splash screen depending on setting
-            Intent intent = new Intent(getApplicationContext(), splash_screen_activity.class); // show splash screen
-            startActivity(intent);
+        if(!Boolean.parseBoolean(b[1]) && !started){ // calls splash screen depending on setting, NOTE: starts from bottom to top
             started = true;
+
+            Intent intent = new Intent(getApplicationContext(), SplashScreenGameActivity.class); // show game name splash screen
+            startActivity(intent);
+
+            intent = new Intent(getApplicationContext(), SplashScreenDevActivity.class); // show developer name splash screen
+            startActivity(intent);
         }
 
 
