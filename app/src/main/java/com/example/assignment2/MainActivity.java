@@ -25,13 +25,15 @@ public class MainActivity extends AppCompatActivity {
     private long remaining_time = INIT_COUNT;
     private final long INTERVAL = 1000; //1 second
 
-    private final static String RECENT_SCORE_FILE_NAME = "score.txt";
-    private final static String TOP_SCORE_FILE_NAME = "score.txt";
+    private final static String RECENT_SCORE_FILE_NAME = "recent_score.txt";
+    private final static String TOP_SCORE_FILE_NAME = "top_score.txt";
+    public final static String SETTING_FILE_NAME = "setting.txt";
     private FileHandler fileHandler;
     ScoreList scoreList = new ScoreList();
 
     //create the media player object
     MediaPlayer mediaPlayer = null;
+    private static boolean soundEffectOnOFF;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +47,16 @@ public class MainActivity extends AppCompatActivity {
         //load the score list
         loadScoreList();
 
+        //load setting status
+        fileHandler = new FileHandler(getApplicationContext(), SETTING_FILE_NAME);
+        soundEffectOnOFF = Boolean.parseBoolean(fileHandler.loadData()[1].split(" = ")[1]);
+
         //game function piece
         binding.buttonClick.setOnClickListener(view -> {
             incrementScore();
-            popSoundHandler();
+            if (soundEffectOnOFF){
+                popSoundHandler();
+            }
         });
 
         if (!gameStarted) {
