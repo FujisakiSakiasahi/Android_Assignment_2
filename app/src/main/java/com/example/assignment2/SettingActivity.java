@@ -42,7 +42,9 @@ public class SettingActivity extends AppCompatActivity {
             Toast.makeText(this, getString(R.string.setting_toast_save), Toast.LENGTH_SHORT).show();
         });
 
-        settingBinding.buttonSettingClose.setOnClickListener(view -> finish());
+        settingBinding.buttonSettingClose.setOnClickListener(view -> {
+            finish();
+        });
     }//end of onCreate
 
     private void setDefaultSettingStatus() {

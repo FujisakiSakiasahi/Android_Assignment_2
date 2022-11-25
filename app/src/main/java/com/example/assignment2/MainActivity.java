@@ -1,12 +1,14 @@
 package com.example.assignment2;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -47,13 +49,10 @@ public class MainActivity extends AppCompatActivity {
         //load the score list
         loadScoreList();
 
-        //load setting status
-//        fileHandler = new FileHandler(getApplicationContext(), SETTING_FILE_NAME);
-//        soundEffectOnOFF = Boolean.parseBoolean(fileHandler.loadData()[1].split(" = ")[1]);
-
         //game function piece
         binding.buttonClick.setOnClickListener(view -> {
             incrementScore();
+            loadSettings();
             if (soundEffectOnOFF){
                 popSoundHandler();
             }
@@ -64,6 +63,27 @@ public class MainActivity extends AppCompatActivity {
         }//end if
 
     }//end onCreate
+
+    public void loadSettings() {
+        fileHandler = new FileHandler(getApplicationContext(), SETTING_FILE_NAME);
+        if(new File(getApplicationContext().getFilesDir(), SETTING_FILE_NAME).exists()){
+            String[] a = fileHandler.loadData();
+            String[] b = a[1].split(" = ");
+            soundEffectOnOFF = Boolean.parseBoolean(b[1]);
+        }else{
+            //create string array that need to be saved
+            String[] saveString = new String[2];
+
+            //add item into string array
+            saveString[0] = "Skip Splash Screen = false";
+            saveString[1] = "Sound effect = true";
+
+            fileHandler.setData(saveString);
+            fileHandler.saveData();
+
+            soundEffectOnOFF = true;
+        }
+    }
 
     private void popSoundHandler() {
         mediaPlayer = MediaPlayer.create(this, R.raw.pop);
