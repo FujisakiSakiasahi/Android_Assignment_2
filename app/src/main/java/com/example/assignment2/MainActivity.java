@@ -25,7 +25,8 @@ public class MainActivity extends AppCompatActivity {
     private long remaining_time = INIT_COUNT;
     private final long INTERVAL = 1000; //1 second
 
-    private final static String SCORE_FILE_NAME = "score.txt";
+    private final static String RECENT_SCORE_FILE_NAME = "score.txt";
+    private final static String TOP_SCORE_FILE_NAME = "score.txt";
     private FileHandler fileHandler;
     ScoreList scoreList = new ScoreList();
 
@@ -40,9 +41,6 @@ public class MainActivity extends AppCompatActivity {
         //binding declaration
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        //initialize the file handler
-        fileHandler = new FileHandler(getApplicationContext(), SCORE_FILE_NAME);
 
         //load the score list
         loadScoreList();
@@ -83,7 +81,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void loadScoreList(){
-        if (new File(getApplicationContext().getFilesDir(), SCORE_FILE_NAME).exists()){
+        //initialize the file handler: for recent score file name
+        fileHandler = new FileHandler(getApplicationContext(), RECENT_SCORE_FILE_NAME);
+
+        if (new File(getApplicationContext().getFilesDir(), RECENT_SCORE_FILE_NAME).exists()){
+            int dataArrayLength = fileHandler.loadData().length;
+
+            for (int i = 0; i < dataArrayLength; i++){
+                String[] record = fileHandler.loadData()[i].split(", ");
+                scoreList.addRecentScore(Integer.parseInt(record[1]), record[0]);
+            }
+        }else{
+            saveScoreList();
+        }
+
+        //initialize the file handler: for top score file name
+        fileHandler = new FileHandler(getApplicationContext(), TOP_SCORE_FILE_NAME);
+
+        if (new File(getApplicationContext().getFilesDir(), TOP_SCORE_FILE_NAME).exists()){
             int dataArrayLength = fileHandler.loadData().length;
 
             for (int i = 0; i < dataArrayLength; i++){
@@ -97,23 +112,40 @@ public class MainActivity extends AppCompatActivity {
 
     public void saveScore(String name){ //save score into ScoreList object
         scoreList.addRecentScore(score, name);
+        scoreList.addTopScore(score, name);
     }
 
     public void saveScoreList(){
         //create string array that need to be saved
-        String[] saveString = new String[scoreList.getRecentLength()];
+        String[] saveStringRecent = new String[scoreList.getRecentLength()];
+        String[] saveStringTop = new String[scoreList.getTopLength()];
 
         for (int i = 0 ; i < 10 ; i++) {
             if(scoreList.getRecentScore(i) != -1){
                 //add item into string array
-                saveString[i] = scoreList.getRecentName(i) + ", " + scoreList.getRecentScore(i);
+                saveStringRecent[i] = scoreList.getRecentName(i) + ", " + scoreList.getRecentScore(i);
             }else{
                 break;
             }
         }
 
-        //save the setting status
-        fileHandler.setData(saveString);
+        for (int i = 0 ; i < 10 ; i++) {
+            if(scoreList.getTopScore(i) != -1){
+                //add item into string array
+                saveStringTop[i] = scoreList.getTopName(i) + ", " + scoreList.getTopScore(i);
+            }else{
+                break;
+            }
+        }
+
+        //save the score status
+        fileHandler = new FileHandler(getApplicationContext(), RECENT_SCORE_FILE_NAME);
+        fileHandler.setData(saveStringRecent);
+        fileHandler.saveData();
+
+        //save the score status
+        fileHandler = new FileHandler(getApplicationContext(), TOP_SCORE_FILE_NAME);
+        fileHandler.setData(saveStringTop);
         fileHandler.saveData();
     }
 
