@@ -47,7 +47,7 @@ public class DisplayScore extends DialogFragment {
                 edittext_name.requestFocus();
             }else{
                 MainActivity mainActivity = (MainActivity) getActivity();
-                mainActivity.saveScore(name);
+                mainActivity.saveScore(name, score);
                 this.dismiss();
             }
 

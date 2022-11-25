@@ -44,6 +44,9 @@
 
         </activity>
 
+        <activity android:name=".RecentScoreActivity"
+            android:exported="false"/>
+
 
     </application>
 

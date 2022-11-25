@@ -2,6 +2,7 @@ package com.example.assignment2;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import java.sql.Array;
 import java.util.List;
@@ -24,14 +25,20 @@ public class ScoreList implements Parcelable {
     public void addTopScore(int score, String name){
         Score score0 = new Score(score, name);
 
-        for (int i = 0 ; i < topScoreList.size() ; i++){
+        int x = topScoreList.size();
+
+        for (int i = 0 ; i < x ; i++){
             if(topScoreList.get(i).getScore() <= score){
                 topScoreList.add(i, score0);
                 if (topScoreList.size() > 10) {
                     topScoreList.remove(9);
                 }
+                return;
             }
         }
+
+        topScoreList.add(new Score(score, name));
+
     }
 
     public ScoreList(){}
@@ -78,8 +85,21 @@ public class ScoreList implements Parcelable {
         if(getTopLength() == 0){
             return post;
         }else{
-            for (int i = 0; i<10; i++){
+            for (int i = 0; i < getTopLength(); i++){
                 post.add("<b>" + topScoreList.get(i).getName() + "</b> \n" + topScoreList.get(i).getScore());
+            }
+            return post;
+        }
+    }
+
+    public ArrayList getRecentScores(){
+        ArrayList<String> post = new ArrayList<>();
+
+        if(getTopLength() == 0){
+            return post;
+        }else{
+            for (int i = 0; i<10; i++){
+                post.add("<b>" + recentScoreList.get(i).getName() + "</b> \n" + recentScoreList.get(i).getScore());
             }
             return post;
         }
