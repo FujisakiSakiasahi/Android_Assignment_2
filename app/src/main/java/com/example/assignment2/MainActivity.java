@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.Menu;
@@ -28,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
     private FileHandler fileHandler;
     ScoreList scoreList = new ScoreList();
 
+    //create the media player object
+    MediaPlayer mediaPlayer = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,14 +47,36 @@ public class MainActivity extends AppCompatActivity {
         //load the score list
         loadScoreList();
 
+
+
         //game function piece
-        binding.buttonClick.setOnClickListener(view -> incrementScore());
+        binding.buttonClick.setOnClickListener(view -> {
+            incrementScore();
+            popSoundHandler();
+        });
 
         if (!gameStarted) {
             resetGame();
         }//end if
 
     }//end onCreate
+
+    private void popSoundHandler() {
+        mediaPlayer = MediaPlayer.create(this, R.raw.pop);
+        if (!mediaPlayer.isPlaying()){
+            mediaPlayer.start();
+        }else{
+            mediaPlayer.stop();
+            mediaPlayer.release();
+            mediaPlayer = MediaPlayer.create(this, R.raw.pop);
+        }
+
+        mediaPlayer.setOnCompletionListener(mediaPlayer -> {
+            mediaPlayer.reset();
+            mediaPlayer.release();
+            mediaPlayer = null;
+        });
+    }
 
     @Override
     protected void onStop() {
