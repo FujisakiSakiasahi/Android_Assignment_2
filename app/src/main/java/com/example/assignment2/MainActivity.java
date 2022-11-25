@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -23,8 +24,10 @@ public class MainActivity extends AppCompatActivity {
     private final long INIT_COUNT = 10000; //60 seconds
     private long remaining_time = INIT_COUNT;
     private final long INTERVAL = 1000; //1 second
+    private static boolean started = false;
 
     private final static String SCORE_FILE_NAME = "score.txt";
+    public final static String SETTING_FILE_NAME = "setting.txt";
     private FileHandler fileHandler;
     ScoreList scoreList = new ScoreList();
 
@@ -32,6 +35,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        fileHandler = new FileHandler(getApplicationContext(),SETTING_FILE_NAME);
+        String[] a = fileHandler.loadData();
+        String[] b = a[0].split( " = " );
+
+        if(!Boolean.parseBoolean(b[1]) && !started){ // calls splash screen depending on setting
+            Intent intent = new Intent(getApplicationContext(), splash_screen_activity.class); // show splash screen
+            startActivity(intent);
+            started = true;
+        }
+
 
         //binding declaration
         binding = ActivityMainBinding.inflate(getLayoutInflater());
