@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private final long INIT_COUNT = 10000; //60 seconds
     private long remaining_time = INIT_COUNT;
     private final long INTERVAL = 1000; //1 second
+    private static boolean started = false;
 
     private final static String RECENT_SCORE_FILE_NAME = "recent_score.txt";
     private final static String TOP_SCORE_FILE_NAME = "top_score.txt";
@@ -41,6 +42,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        fileHandler = new FileHandler(getApplicationContext(),SETTING_FILE_NAME);
+        String[] a = fileHandler.loadData();
+        String[] b = a[0].split( " = " );
+
+        if(!Boolean.parseBoolean(b[1]) && !started){ // calls splash screen depending on setting, NOTE: starts from bottom to top
+            started = true;
+
+            Intent intent = new Intent(getApplicationContext(), SplashScreenGameActivity.class); // show game name splash screen
+            startActivity(intent);
+
+            intent = new Intent(getApplicationContext(), SplashScreenDevActivity.class); // show developer name splash screen
+            startActivity(intent);
+        }
+
 
         //binding declaration
         binding = ActivityMainBinding.inflate(getLayoutInflater());
