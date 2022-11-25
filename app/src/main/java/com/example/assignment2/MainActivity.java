@@ -228,12 +228,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.menu_setting:
                  intent = new Intent(getApplicationContext(), SettingActivity.class);
                 break;
-            case R.id.menu_scoreboard:
-                //intent = new Intent(getApplicationContext(), SettingActivity.class);
+            case R.id.menu_recent_score:
                 break;
-            case R.id.menu_taktaulagi:
-                //intent = new Intent(getApplicationContext(), SettingActivity.class);
-                showEndGameDialog();
+            case R.id.menu_leaderboard:
                 break;
             default:
                 return super.onOptionsItemSelected(item);

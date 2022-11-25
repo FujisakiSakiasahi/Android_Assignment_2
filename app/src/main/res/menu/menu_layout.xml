@@ -5,9 +5,9 @@
         android:id="@+id/menu_setting"
         android:title="@string/setting" />
     <item
-        android:id="@+id/menu_scoreboard"
-        android:title="@string/scoreboard" />
+        android:id="@+id/menu_recent_score"
+        android:title="@string/menu_recent_score" />
     <item
-        android:id="@+id/menu_taktaulagi"
-        android:title="@string/taktauyet" />
+        android:id="@+id/menu_leaderboard"
+        android:title="@string/menu_leaderboard" />
 </menu>

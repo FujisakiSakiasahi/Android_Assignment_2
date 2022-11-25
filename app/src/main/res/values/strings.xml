@@ -8,8 +8,8 @@
 
     <!--for menu-->
     <string name="setting">Settings</string>
-    <string name="scoreboard">Scoreboard</string>
-    <string name="taktauyet">Tak tau yet</string>
+    <string name="menu_recent_score">Recent Score</string>
+    <string name="menu_leaderboard">Leaderboard</string>
 
     <!--for custom dialog: output result-->
     <string name="output_score">Your Score is</string>
@@ -17,7 +17,7 @@
     <string name="output_save">Save</string>
     <string name="output_cancel">Cancel</string>
 
-    <!--for leaderboard-->
+    <!--for leaderboard/recent score-->
     <string name="highscore">Leaderboard</string>
     <string name="recent_score">Show Recent Scores</string>
 
