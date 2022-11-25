@@ -27,8 +27,6 @@
             android:name=".SettingActivity"
             android:exported="false"/>
         <activity android:name=".LeaderboardActivity" android:exported="false"/>
-            android:exported="false">
-        </activity>
 
         <activity
             android:name=".SplashScreenGameActivity"

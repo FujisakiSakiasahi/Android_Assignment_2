@@ -14,28 +14,30 @@ public class SplashScreenDevActivity extends AppCompatActivity {
     private final long INIT_COUNT = 6000; //6 seconds
     private long remaining_time = INIT_COUNT;
     private final long INTERVAL = 1000; //1 second
-
     private ImageView imageView_dev;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_screen_dev);
 
-        imageView_dev = findViewById(R.id.imageView_dev);
+        imageView_dev = findViewById(R.id.imageView_dev); // reference image view
 
+        // reference animations and set their duration
         final Animation fadeIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in);
-        fadeIn.setDuration(1500);
-
         final Animation fadeOut = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_out);
+        fadeIn.setDuration(1500);
         fadeOut.setDuration(1500);
 
-        imageView_dev.setAnimation(fadeIn);
+        imageView_dev.setAnimation(fadeIn); // start fade in
+
         CountDownTimer t = new CountDownTimer(remaining_time, INTERVAL) {
             @Override
             public void onTick(long l) {
                 int second = (int) l / 1000;
                 remaining_time = l;
+
                 if (second == 1) {
+                    // start fade out and hide image view
                     imageView_dev.setAnimation(fadeOut);
                     imageView_dev.setVisibility(View.INVISIBLE);
                 }
