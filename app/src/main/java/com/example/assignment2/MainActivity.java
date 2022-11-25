@@ -101,12 +101,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void saveScoreList(){
         //create string array that need to be saved
-        String[] saveString = new String[scoreList.getLength()];
+        String[] saveString = new String[scoreList.getRecentLength()];
 
         for (int i = 0 ; i < 10 ; i++) {
-            if(scoreList.getScore(i) != -1){
+            if(scoreList.getRecentScore(i) != -1){
                 //add item into string array
-                saveString[i] = scoreList.getName(i) + ", " + scoreList.getScore(i);
+                saveString[i] = scoreList.getRecentName(i) + ", " + scoreList.getRecentScore(i);
             }else{
                 break;
             }

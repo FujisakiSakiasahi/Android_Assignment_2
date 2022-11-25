@@ -15,23 +15,50 @@ public class ScoreList {
         if (recentScoreList.size() > 10) {
             recentScoreList.remove(9);
         }
+
+        for (int i = 0 ; i < topScoreList.size() ; i++){
+            if(topScoreList.get(i).getScore() <= score){
+                topScoreList.add(i, score0);
+                if (topScoreList.size() > 10) {
+                    topScoreList.remove(9);
+                }
+            }
+        }
     }
 
-    public int getScore(int index) {
+    public int getRecentScore(int index) {
         if(index+1 <= recentScoreList.size()){
             return recentScoreList.get(index).getScore();
         }
         return -1;
     }
 
-    public String getName(int index) {
+    public String getRecentName(int index) {
         if(index+1 <= recentScoreList.size()){
             return recentScoreList.get(index).getName();
         }
         return "RECORD NOT FOUND";
     }
 
-    public int getLength(){
+    public int getRecentLength(){
         return recentScoreList.size();
+    }
+
+    public int getTopScore(int index) {
+        if(index+1 <= topScoreList.size()){
+            return topScoreList.get(index).getScore();
+        }
+        return -1;
+    }
+
+    public String getTopName(int index) {
+        if(index+1 <= topScoreList.size()){
+            return topScoreList.get(index).getName();
+        }
+        return "RECORD NOT FOUND";
+    }
+
+    public int getTopLength(){
+        return topScoreList.size();
     }
 }
