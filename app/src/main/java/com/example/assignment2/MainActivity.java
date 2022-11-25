@@ -47,8 +47,6 @@ public class MainActivity extends AppCompatActivity {
         //load the score list
         loadScoreList();
 
-
-
         //game function piece
         binding.buttonClick.setOnClickListener(view -> {
             incrementScore();

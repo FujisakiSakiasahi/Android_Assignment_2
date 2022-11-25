@@ -59,4 +59,15 @@
         app:layout_constraintEnd_toStartOf="@+id/button_settingSetDefault"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Switch
+        android:id="@+id/switch_soundEffect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layoutDirection="rtl"
+        android:text="@string/setting_sound_effect"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkbox_splash_screen" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -48,6 +48,7 @@ public class SettingActivity extends AppCompatActivity {
     private void setDefaultSettingStatus() {
         //set the settings view into default setting status
         settingBinding.checkboxSplashScreen.setChecked(false);
+        settingBinding.switchSoundEffect.setChecked(true);
     }
 
     private void checkSettingStatusFile() {
@@ -62,10 +63,11 @@ public class SettingActivity extends AppCompatActivity {
 
     private void savingSettingStatus() {
         //create string array that need to be saved
-        String[] saveString = new String[1];
+        String[] saveString = new String[2];
 
         //add item into string array
         saveString[0] = "Skip Splash Screen = " + settingBinding.checkboxSplashScreen.isChecked();
+        saveString[1] = "Sound effect = " + settingBinding.switchSoundEffect.isChecked();
 
         //save the setting status
         fileHandler.setData(saveString);
@@ -80,5 +82,6 @@ public class SettingActivity extends AppCompatActivity {
         }
 
         settingBinding.checkboxSplashScreen.setChecked(Boolean.parseBoolean(stat[0]));
+        settingBinding.switchSoundEffect.setChecked(Boolean.parseBoolean(stat[1]));
     }
 }
