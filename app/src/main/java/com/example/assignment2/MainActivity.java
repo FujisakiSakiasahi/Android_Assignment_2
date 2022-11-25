@@ -48,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
         loadScoreList();
 
         //load setting status
-        fileHandler = new FileHandler(getApplicationContext(), SETTING_FILE_NAME);
-        soundEffectOnOFF = Boolean.parseBoolean(fileHandler.loadData()[1].split(" = ")[1]);
+//        fileHandler = new FileHandler(getApplicationContext(), SETTING_FILE_NAME);
+//        soundEffectOnOFF = Boolean.parseBoolean(fileHandler.loadData()[1].split(" = ")[1]);
 
         //game function piece
         binding.buttonClick.setOnClickListener(view -> {
@@ -231,6 +231,8 @@ public class MainActivity extends AppCompatActivity {
             case R.id.menu_recent_score:
                 break;
             case R.id.menu_leaderboard:
+                intent = new Intent(getApplicationContext(), LeaderboardActivity.class);
+                intent.putExtra("SCORE_LIST", scoreList);
                 break;
             default:
                 return super.onOptionsItemSelected(item);

@@ -1,9 +1,13 @@
 package com.example.assignment2;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.sql.Array;
 import java.util.List;
 import java.util.ArrayList;
 
-public class ScoreList {
+public class ScoreList implements Parcelable {
     private List<Score> recentScoreList = new ArrayList<Score>();
     private List<Score> topScoreList = new ArrayList<Score>();
 
@@ -29,6 +33,8 @@ public class ScoreList {
             }
         }
     }
+
+    public ScoreList(){}
 
     public int getRecentScore(int index) {
         if(index+1 <= recentScoreList.size()){
@@ -65,4 +71,42 @@ public class ScoreList {
     public int getTopLength(){
         return topScoreList.size();
     }
+
+    public ArrayList getTopScores(){
+        ArrayList<String> post = new ArrayList<>();
+
+        for (int i = 0; i<10; i++){
+            post.add("<b>" + topScoreList.get(i).getName() + "</b> \n" + topScoreList.get(i).getScore());
+        }
+
+        return post;
+
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeList(this.recentScoreList);
+        dest.writeList(this.topScoreList);
+    }
+
+    public static final Parcelable.Creator<ScoreList> CREATOR = new Parcelable.Creator<ScoreList>() {
+        public ScoreList createFromParcel(Parcel in) {
+            return new ScoreList(in);
+        }
+
+        public ScoreList[] newArray(int size) {
+            return new ScoreList[size];
+        }
+    };
+
+    private ScoreList(Parcel in) {
+        in.readList(recentScoreList, ScoreList.class.getClassLoader());
+        in.readList(topScoreList, ScoreList.class.getClassLoader());
+    }
+
 }
