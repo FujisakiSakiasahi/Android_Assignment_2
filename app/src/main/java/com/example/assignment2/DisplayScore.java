@@ -42,6 +42,12 @@ public class DisplayScore extends DialogFragment {
         final EditText edittext_name = display_score.findViewById(R.id.edittext_name);
         button_save.setOnClickListener(view -> {
             String name = edittext_name.getText().toString();
+            if (name.isEmpty()){
+                edittext_name.setError("This file need to be entered in order to save record");
+                edittext_name.requestFocus();
+            }
+
+
             MainActivity mainActivity = (MainActivity) getActivity();
 
             mainActivity.saveScore(name);
