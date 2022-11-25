@@ -45,14 +45,12 @@ public class DisplayScore extends DialogFragment {
             if (name.isEmpty()){
                 edittext_name.setError("This file need to be entered in order to save record");
                 edittext_name.requestFocus();
+            }else{
+                MainActivity mainActivity = (MainActivity) getActivity();
+                mainActivity.saveScore(name);
+                this.dismiss();
             }
 
-
-            MainActivity mainActivity = (MainActivity) getActivity();
-
-            mainActivity.saveScore(name);
-
-            this.dismiss();
         });
 
         //set the layout to the dialog
