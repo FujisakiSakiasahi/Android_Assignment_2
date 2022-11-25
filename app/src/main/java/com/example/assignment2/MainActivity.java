@@ -6,19 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.example.assignment2.databinding.ActivityMainBinding;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
-import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
     //binding declaration
@@ -146,17 +139,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void endGame(){
-//        DisplayScore dialog = new DisplayScore();
-//        dialog.setScore(score);
-//        if(!getSupportFragmentManager().isDestroyed()){
-//            dialog.show(getSupportFragmentManager(), "ShowDialog");
-//        }else{
-//            Log.d("Error", "Fragment Manager was destroyed");
-//        }
-        //for debug purpose as the custom dialog crash the app
-        saveScore("test2");
-
+        showEndGameDialog();
         resetGame();
+    }
+
+    private void showEndGameDialog() {
+        DisplayScore dialog = new DisplayScore();
+        dialog.setScore(score);
+        dialog.show(getSupportFragmentManager(), "ShowDialog");
     }
 
     @Override
@@ -179,7 +169,10 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.menu_taktaulagi:
                 //intent = new Intent(getApplicationContext(), SettingActivity.class);
+                showEndGameDialog();
                 break;
+            default:
+                return super.onOptionsItemSelected(item);
         }
         startActivity(intent);
         return super.onOptionsItemSelected(item);
@@ -193,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
         outState.putLong("TIME_LEFT", remaining_time);
         outState.putInt("SCORE", score);
 
-
+        timer.cancel();
     }
 
     @Override

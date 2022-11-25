@@ -15,7 +15,6 @@ public class ScoreList {
         if (recentScoreList.size() > 10) {
             recentScoreList.remove(9);
         }
-
     }
 
     public int getScore(int index) {

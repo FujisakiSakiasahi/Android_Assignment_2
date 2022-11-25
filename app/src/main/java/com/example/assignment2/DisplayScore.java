@@ -26,13 +26,12 @@ public class DisplayScore extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        MainActivity mainActivity = (MainActivity) getActivity();
 
         //load the name layout
         View display_score = inflater.inflate(R.layout.display_score, null);
 
         final TextView text_outputscore = display_score.findViewById(R.id.text_outputscore);
-        text_outputscore.setText(score);
+        text_outputscore.setText(score+"");
 
         final Button button_cancel = display_score.findViewById(R.id.button_cancel);
         button_cancel.setOnClickListener(view -> {
@@ -43,6 +42,7 @@ public class DisplayScore extends DialogFragment {
         final EditText edittext_name = display_score.findViewById(R.id.edittext_name);
         button_save.setOnClickListener(view -> {
             String name = edittext_name.getText().toString();
+            MainActivity mainActivity = (MainActivity) getActivity();
 
             mainActivity.saveScore(name);
 
