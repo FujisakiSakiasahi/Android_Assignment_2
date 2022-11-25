@@ -1,6 +1,7 @@
 package com.example.assignment2;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,13 +34,15 @@ public class SettingActivity extends AppCompatActivity {
         settingBinding.buttonSettingSetDefault.setOnClickListener(view -> {
             setDefaultSettingStatus();
             savingSettingStatus();
+            Toast.makeText(this, getString(R.string.setting_toast_set_default), Toast.LENGTH_SHORT).show();
         });
 
         settingBinding.buttonSettingSave.setOnClickListener(view -> {
             savingSettingStatus();
+            Toast.makeText(this, getString(R.string.setting_toast_save), Toast.LENGTH_SHORT).show();
         });
 
-        settingBinding.buttonSettingCancel.setOnClickListener(view -> finish());
+        settingBinding.buttonSettingClose.setOnClickListener(view -> finish());
     }//end of onCreate
 
     private void setDefaultSettingStatus() {

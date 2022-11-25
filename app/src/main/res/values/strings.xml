@@ -27,7 +27,9 @@
 
     <!--for setting layout-->
     <string name="setting_splash_screen">Skip splash screen</string>
-    <string name="setting_button_cancel">Cancel</string>
+    <string name="setting_button_close">Close</string>
     <string name="setting_button_set_default">Set Default</string>
     <string name="setting_button_save">Save</string>
+    <string name="setting_toast_save">The settings have been saved</string>
+    <string name="setting_toast_set_default">The settings have set to default</string>
 </resources>
