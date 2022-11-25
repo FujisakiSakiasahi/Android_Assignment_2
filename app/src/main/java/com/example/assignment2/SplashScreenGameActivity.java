@@ -2,6 +2,7 @@ package com.example.assignment2;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,11 +12,13 @@ public class SplashScreenGameActivity extends AppCompatActivity {
     private long remaining_time = INIT_COUNT;
     private final long INTERVAL = 1000; //1 second
 
+    private ImageView imageView;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_screen_game);
 
-
+        imageView = findViewById(R.id.imageView_game);
 
         CountDownTimer t = new CountDownTimer(remaining_time, INTERVAL) {
             @Override

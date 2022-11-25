@@ -31,14 +31,16 @@
         <activity
             android:name=".SplashScreenGameActivity"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            android:theme="@style/noAnimation">
         </activity>
 
         <activity
             android:name=".SplashScreenDevActivity"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            android:theme="@style/noAnimation">
+
         </activity>
+
 
     </application>
 
