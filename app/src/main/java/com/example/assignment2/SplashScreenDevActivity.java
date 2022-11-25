@@ -34,7 +34,7 @@ public class SplashScreenDevActivity extends AppCompatActivity {
             public void onTick(long l) {
                 int second = (int) l / 1000;
                 remaining_time = l;
-                if (second == fadeOut.getDuration()) {
+                if (second == 1) {
                     imageView_dev.setAnimation(fadeOut);
                 }
             }
