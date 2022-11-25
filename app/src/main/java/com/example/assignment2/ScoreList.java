@@ -7,7 +7,7 @@ public class ScoreList {
     private List<Score> recentScoreList = new ArrayList<Score>();
     private List<Score> topScoreList = new ArrayList<Score>();
 
-    public void addScore(int score, String name) {
+    public void addRecentScore(int score, String name) {
         Score score0 = new Score(score, name);
 
         recentScoreList.add(0, score0);
@@ -15,6 +15,10 @@ public class ScoreList {
         if (recentScoreList.size() > 10) {
             recentScoreList.remove(9);
         }
+    }
+
+    public void addTopScore(int score, String name){
+        Score score0 = new Score(score, name);
 
         for (int i = 0 ; i < topScoreList.size() ; i++){
             if(topScoreList.get(i).getScore() <= score){

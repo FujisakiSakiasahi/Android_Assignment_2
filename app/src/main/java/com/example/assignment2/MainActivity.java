@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
 
             for (int i = 0; i < dataArrayLength; i++){
                 String[] record = fileHandler.loadData()[i].split(", ");
-                scoreList.addScore(Integer.parseInt(record[1]), record[0]);
+                scoreList.addRecentScore(Integer.parseInt(record[1]), record[0]);
             }
         }else{
             saveScoreList();
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void saveScore(String name){ //save score into ScoreList object
-        scoreList.addScore(score, name);
+        scoreList.addRecentScore(score, name);
     }
 
     public void saveScoreList(){
