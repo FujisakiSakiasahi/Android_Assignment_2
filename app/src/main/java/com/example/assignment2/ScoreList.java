@@ -75,12 +75,14 @@ public class ScoreList implements Parcelable {
     public ArrayList getTopScores(){
         ArrayList<String> post = new ArrayList<>();
 
-        for (int i = 0; i<10; i++){
-            post.add("<b>" + topScoreList.get(i).getName() + "</b> \n" + topScoreList.get(i).getScore());
+        if(getTopLength() == 0){
+            return post;
+        }else{
+            for (int i = 0; i<10; i++){
+                post.add("<b>" + topScoreList.get(i).getName() + "</b> \n" + topScoreList.get(i).getScore());
+            }
+            return post;
         }
-
-        return post;
-
     }
 
     @Override

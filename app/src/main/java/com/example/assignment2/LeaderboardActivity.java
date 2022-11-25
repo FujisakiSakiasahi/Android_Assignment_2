@@ -17,8 +17,8 @@ public class LeaderboardActivity extends AppCompatActivity {
     private ScoreList scoreList = new ScoreList();
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.leaderboard);
 
         binding = LeaderboardBinding.inflate(getLayoutInflater());

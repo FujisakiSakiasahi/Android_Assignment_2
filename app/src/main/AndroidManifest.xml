@@ -26,8 +26,11 @@
         <activity
             android:name=".SettingActivity"
             android:exported="false"/>
-        <activity android:name=".LeaderboardActivity" android:exported="false"/>
 
+        <activity
+            android:name=".LeaderboardActivity"
+            android:exported="false"/>
+        
         <activity
             android:name=".SplashScreenGameActivity"
             android:exported="false"
