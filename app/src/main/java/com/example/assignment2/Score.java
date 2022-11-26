@@ -65,7 +65,7 @@ public class Score implements Parcelable {
 
     /**
      * describeContents: <br/>
-     * - ______
+     * - overriding an abstract method
      *
      * @return ______
      */
@@ -76,7 +76,7 @@ public class Score implements Parcelable {
 
     /**
      * writeToParcel: <br/>
-     * - ______
+     * - writing the data to a parcel to be transferred through activities
      *
      * @param dest ______
      * @param flags _____
@@ -87,7 +87,9 @@ public class Score implements Parcelable {
         dest.writeInt(score);
     }
 
-    //______________
+    /**
+     * calls the new constructor below and sends the parcel through for processing and creating a new object
+     */
     public static final Parcelable.Creator<Score> CREATOR = new Parcelable.Creator<Score>() {
         public Score createFromParcel(Parcel in) {
             return new Score(in);
@@ -100,7 +102,7 @@ public class Score implements Parcelable {
 
     /**
      * Score: <br/>
-     * - ______
+     * - a constructor for parcel parameter for data transfer
      *
      * @param in __________
      */
