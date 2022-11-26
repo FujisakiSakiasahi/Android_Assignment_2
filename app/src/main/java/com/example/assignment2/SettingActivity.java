@@ -3,6 +3,8 @@ package com.example.assignment2;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.widget.CompoundButton;
+import android.widget.SeekBar;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -35,7 +37,28 @@ public class SettingActivity extends AppCompatActivity {
         //if exists load status else create file
         checkSettingStatusFile();
 
+        //use to see if the settings got changes or not
+        //set oncheck change listener for checkbox
+        settingBinding.checkboxSplashScreen.setOnCheckedChangeListener((compoundButton, b) -> gotChanges = true);
+        //set oncheck change listener for checkbox
+        settingBinding.switchSoundEffect.setOnCheckedChangeListener((compoundButton, b) -> gotChanges = true);
+        //set on seek bar change listener
+        settingBinding.seekbarSoundEffectVolume.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                gotChanges = true;
+            }
 
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
 
         //set the onclick listener to the set default button
         settingBinding.buttonSettingSetDefault.setOnClickListener(view -> {
@@ -79,9 +102,9 @@ public class SettingActivity extends AppCompatActivity {
 
                 AlertDialog dialog = builder.create();
                 dialog.show();
+            }else{
+                finish();
             }
-
-            finish();
         });
     }//end of onCreate
 
