@@ -19,7 +19,7 @@ import com.example.assignment2.databinding.ActivityMainBinding;
 
 import java.io.File;
 
-public class MainActivity<pricate> extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
     //binding declaration
     private ActivityMainBinding binding = null;
 
@@ -210,7 +210,7 @@ public class MainActivity<pricate> extends AppCompatActivity {
 
             if(dataArrayLength != 0){
                 //load the data into score list
-                for (int i = dataArrayLength; i >= 0; i--){
+                for (int i = dataArrayLength; i > 0; i--){
                     String[] record = fileHandler.loadData()[i].split(", ");
                     scoreList.addRecentScore(Integer.parseInt(record[1]), record[0]);
                 }
