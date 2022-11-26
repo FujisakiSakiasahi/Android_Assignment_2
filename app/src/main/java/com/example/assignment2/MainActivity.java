@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private int score = 0;
     private boolean gameStarted = false;
     private CountDownTimer timer;
-    private final long INIT_COUNT = 10000; //60 seconds
+    private final long INIT_COUNT = 60000; //60 seconds
     private long remaining_time = INIT_COUNT;
     private final long INTERVAL = 1000; //1 second
     private static boolean appStarted = false;
