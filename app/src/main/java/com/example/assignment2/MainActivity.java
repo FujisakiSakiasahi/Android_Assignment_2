@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     //create the media player object
     MediaPlayer mediaPlayer = null;
     private static boolean soundEffectOnOFF;
+    private static int soundEffectVolume;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,13 +113,19 @@ public class MainActivity extends AppCompatActivity {
             a = fileHandler.loadData();
             b = a[1].split(" = ");
             soundEffectOnOFF = Boolean.parseBoolean(b[1]);
+
+            //load the sound effect volume setting
+            a = fileHandler.loadData();
+            b = a[2].split(" = ");
+            soundEffectVolume = Integer.parseInt(b[1]);
         }else{
             //create string array that need to be saved
-            String[] saveString = new String[2];
+            String[] saveString = new String[3];
 
             //add item into string array
             saveString[0] = "Skip Splash Screen = false";
-            saveString[1] = "Sound effect = true";
+            saveString[1] = "Sound Effect = true";
+            saveString[2] = "Sound Effect Volume = 50";
 
             //create and write the file
             fileHandler.setData(saveString);
@@ -127,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
             //set the settings value
             soundEffectOnOFF = true;
             skipSplashArt = false;
+            soundEffectVolume = 50;
         }
     }
 
@@ -137,6 +145,9 @@ public class MainActivity extends AppCompatActivity {
     private void popSoundHandler() {
         //reference to the pop sound raw resource file
         mediaPlayer = MediaPlayer.create(this, R.raw.pop);
+
+        //set pop sound volume
+        mediaPlayer.setVolume((float)soundEffectVolume/100, (float)soundEffectVolume/100);
 
         if (!mediaPlayer.isPlaying()){
             mediaPlayer.start();
@@ -166,10 +177,12 @@ public class MainActivity extends AppCompatActivity {
         if (new File(getApplicationContext().getFilesDir(), RECENT_SCORE_FILE_NAME).exists()){
             int dataArrayLength = fileHandler.loadData().length;
 
-            //load the data into score list
-            for (int i = dataArrayLength; i >= 0; i--){
-                String[] record = fileHandler.loadData()[i].split(", ");
-                scoreList.addRecentScore(Integer.parseInt(record[1]), record[0]);
+            if(dataArrayLength != 0){
+                //load the data into score list
+                for (int i = dataArrayLength; i >= 0; i--){
+                    String[] record = fileHandler.loadData()[i].split(", ");
+                    scoreList.addRecentScore(Integer.parseInt(record[1]), record[0]);
+                }
             }
         }else{
             saveScoreList();

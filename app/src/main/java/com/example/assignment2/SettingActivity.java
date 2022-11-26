@@ -90,6 +90,7 @@ public class SettingActivity extends AppCompatActivity {
 
         settingBinding.checkboxSplashScreen.setChecked(Boolean.parseBoolean(stat[0]));
         settingBinding.switchSoundEffect.setChecked(Boolean.parseBoolean(stat[1]));
+        settingBinding.seekbarSoundEffectVolume.setProgress(Integer.parseInt(stat[2]));
     }
 
     /**
@@ -100,6 +101,7 @@ public class SettingActivity extends AppCompatActivity {
         //set the settings view into default setting status
         settingBinding.checkboxSplashScreen.setChecked(false);
         settingBinding.switchSoundEffect.setChecked(true);
+        settingBinding.seekbarSoundEffectVolume.setProgress(50);
     }
 
     /**
@@ -108,11 +110,12 @@ public class SettingActivity extends AppCompatActivity {
      */
     private void savingSettingStatus() {
         //create string array that need to be saved
-        String[] saveString = new String[2];
+        String[] saveString = new String[3];
 
         //add item into string array
         saveString[0] = "Skip Splash Screen = " + settingBinding.checkboxSplashScreen.isChecked();
-        saveString[1] = "Sound effect = " + settingBinding.switchSoundEffect.isChecked();
+        saveString[1] = "Sound Effect = " + settingBinding.switchSoundEffect.isChecked();
+        saveString[2] = "Sound Effect Volume = " + settingBinding.seekbarSoundEffectVolume.getProgress();
 
         //save the setting status
         fileHandler.setData(saveString);

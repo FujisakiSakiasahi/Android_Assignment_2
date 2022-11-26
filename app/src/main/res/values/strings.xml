@@ -26,8 +26,11 @@
     <string name="back_button">Back Button</string>
 
     <!--for setting layout-->
-    <string name="setting_splash_screen">Skip splash screen</string>
-    <string name="setting_sound_effect">Sound effect</string>
+    <string name="setting_splash_screen1">Splash Screen</string>
+    <string name="setting_splash_screen2">Skip splash screen</string>
+    <string name="setting_sound_effect1">Sound Effect</string>
+    <string name="setting_sound_effect2">Sound effect</string>
+    <string name="setting_sound_effect_volume">Sound effect volume</string>
     <string name="setting_button_close">Close</string>
     <string name="setting_button_set_default">Set Default</string>
     <string name="setting_button_save">Save</string>

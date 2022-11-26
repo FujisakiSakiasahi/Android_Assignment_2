@@ -11,9 +11,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="@string/setting_splash_screen"
+        android:text="@string/setting_splash_screen2"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_settingTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/text_splashScreen"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <TextView
         android:id="@+id/text_settingTitle"
@@ -64,10 +66,79 @@
         android:id="@+id/switch_soundEffect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/text_soundEffect2"
+        app:layout_constraintStart_toStartOf="@+id/seekbar_soundEffectVolume"
+        app:layout_constraintTop_toTopOf="@+id/text_soundEffect2"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/text_soundEffect1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:text="@string/setting_sound_effect1"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline2" />
+
+    <TextView
+        android:id="@+id/text_splashScreen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/setting_splash_screen1"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="70dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="162dp" />
+
+    <TextView
+        android:id="@+id/text_soundEffect2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/setting_sound_effect2"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_soundEffect1" />
+
+    <TextView
+        android:id="@+id/text_soundEffectVolume"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/setting_sound_effect_volume"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_soundEffect2" />
+
+    <SeekBar
+        android:id="@+id/seekbar_soundEffectVolume"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layoutDirection="rtl"
-        android:text="@string/setting_sound_effect"
+        app:layout_constraintBottom_toBottomOf="@+id/text_soundEffectVolume"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkbox_splash_screen" />
+        app:layout_constraintStart_toEndOf="@+id/text_soundEffectVolume"
+        app:layout_constraintTop_toTopOf="@+id/text_soundEffectVolume" />
 </androidx.constraintlayout.widget.ConstraintLayout>
