@@ -43,11 +43,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        fileHandler = new FileHandler(getApplicationContext(),SETTING_FILE_NAME);
-        String[] a = fileHandler.loadData();
-        String[] b = a[0].split( " = " );
+        loadSettings();
 
-        if(!Boolean.parseBoolean(b[1]) && !started){ // calls splash screen depending on setting, NOTE: starts from bottom to top
+        if(!started){ // calls splash screen depending on setting, NOTE: starts from bottom to top
             started = true;
 
             Intent intent = new Intent(getApplicationContext(), SplashScreenGameActivity.class); // show game name splash screen
@@ -83,8 +81,12 @@ public class MainActivity extends AppCompatActivity {
     public void loadSettings() {
         fileHandler = new FileHandler(getApplicationContext(), SETTING_FILE_NAME);
         if(new File(getApplicationContext().getFilesDir(), SETTING_FILE_NAME).exists()){
+
             String[] a = fileHandler.loadData();
-            String[] b = a[1].split(" = ");
+            String[] b = a[0].split( " = " );
+            started = Boolean.parseBoolean(b[1]);
+            a = fileHandler.loadData();
+            b = a[1].split(" = ");
             soundEffectOnOFF = Boolean.parseBoolean(b[1]);
         }else{
             //create string array that need to be saved
