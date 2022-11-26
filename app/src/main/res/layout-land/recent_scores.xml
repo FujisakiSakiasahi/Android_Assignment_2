@@ -9,18 +9,19 @@
         android:id="@+id/text_recent_scores"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:text="@string/recent"
         android:textSize="36sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/listview_recent_scores"
+        app:layout_constraintStart_toEndOf="@+id/button_back_rs"
+        app:layout_constraintStart_toStartOf="@+id/listview_recent_scores"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/button_back_rs"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:background="#00FFFFFF"
         android:contentDescription="@string/back_button"
         app:layout_constraintStart_toStartOf="parent"
