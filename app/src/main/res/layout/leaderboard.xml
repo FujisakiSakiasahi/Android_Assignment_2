@@ -26,7 +26,6 @@
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="@+id/listview_highscore"
         app:layout_constraintStart_toEndOf="@+id/button_back_lb"
-        app:layout_constraintStart_toStartOf="@+id/listview_highscore"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
