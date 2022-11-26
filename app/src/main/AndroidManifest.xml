@@ -30,20 +30,19 @@
         <activity
             android:name=".LeaderboardActivity"
             android:exported="false"/>
-        
+
+        <activity android:name=".RecentScoreActivity"
+            android:exported="false"/>
+
         <activity
             android:name=".SplashScreenGameActivity"
             android:exported="false"
-            android:theme="@style/noAnimation">
-        </activity>
+            android:theme="@style/noAnimation" />
 
         <activity
             android:name=".SplashScreenDevActivity"
             android:exported="false"
-            android:theme="@style/noAnimation">
-
-        </activity>
-
+            android:theme="@style/noAnimation" />
 
     </application>
 

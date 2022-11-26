@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
         //load the score list
         loadScoreList();
+        Log.d("LOADING", scoreList.getTopLength() + " " + scoreList.getRecentLength());
 
         //game function piece
         binding.buttonClick.setOnClickListener(view -> {
@@ -133,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
         if (new File(getApplicationContext().getFilesDir(), RECENT_SCORE_FILE_NAME).exists()){
             int dataArrayLength = fileHandler.loadData().length;
 
-            for (int i = 0; i < dataArrayLength; i++){
+            for (int i = dataArrayLength; i >= 0; i--){
                 String[] record = fileHandler.loadData()[i].split(", ");
                 scoreList.addRecentScore(Integer.parseInt(record[1]), record[0]);
             }
@@ -149,14 +150,14 @@ public class MainActivity extends AppCompatActivity {
 
             for (int i = 0; i < dataArrayLength; i++){
                 String[] record = fileHandler.loadData()[i].split(", ");
-                scoreList.addRecentScore(Integer.parseInt(record[1]), record[0]);
+                scoreList.addTopScore(Integer.parseInt(record[1]), record[0]);
             }
         }else{
             saveScoreList();
         }
     }
 
-    public void saveScore(String name){ //save score into ScoreList object
+    public void saveScore(String name, int score){ //save score into ScoreList object
         scoreList.addRecentScore(score, name);
         scoreList.addTopScore(score, name);
     }
@@ -267,10 +268,13 @@ public class MainActivity extends AppCompatActivity {
                  intent = new Intent(getApplicationContext(), SettingActivity.class);
                 break;
             case R.id.menu_recent_score:
+                intent = new Intent(getApplicationContext(), RecentScoreActivity.class);
+                intent.putExtra("SCORE_LIST", scoreList);
                 break;
             case R.id.menu_leaderboard:
                 intent = new Intent(getApplicationContext(), LeaderboardActivity.class);
                 intent.putExtra("SCORE_LIST", scoreList);
+                Log.d("DISPLAYING", String.valueOf(scoreList.getTopLength()));
                 break;
             default:
                 return super.onOptionsItemSelected(item);
