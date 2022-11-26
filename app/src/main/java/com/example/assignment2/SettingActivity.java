@@ -1,5 +1,7 @@
 package com.example.assignment2;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -15,6 +17,7 @@ public class SettingActivity extends AppCompatActivity {
 
     public final static String SETTING_FILE_NAME = "setting.txt";
     private FileHandler fileHandler;
+    private static boolean gotChanges = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,6 +34,8 @@ public class SettingActivity extends AppCompatActivity {
         //check if the setting status file is created or not
         //if exists load status else create file
         checkSettingStatusFile();
+
+
 
         //set the onclick listener to the set default button
         settingBinding.buttonSettingSetDefault.setOnClickListener(view -> {
@@ -53,6 +58,29 @@ public class SettingActivity extends AppCompatActivity {
         //set the onclick listener to the close button
         //use to close the current activity
         settingBinding.buttonSettingClose.setOnClickListener(view -> {
+            if(gotChanges){
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Unsave Settings Changes");
+                builder.setMessage("There are unsaved changes, do you want to leave without saving them?");
+
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        finish();
+                    }
+                });
+
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+
             finish();
         });
     }//end of onCreate
