@@ -103,7 +103,7 @@ public class SettingActivity extends AppCompatActivity {
     }
 
     /**
-     * savingsettingStatus: <br/>
+     * savingSettingStatus: <br/>
      * - use to save the settings into the file
      */
     private void savingSettingStatus() {

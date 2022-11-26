@@ -15,6 +15,12 @@ public class ScoreList implements Parcelable {
     private List<Score> topScoreList = new ArrayList<Score>();
 
     /**
+     * Score Constructor: <br/>
+     * - use to create an object of ScoreList<br/>
+     */
+    public ScoreList(){}
+
+    /**
      * addRecentScore: <br/>
      * - use to add a score to the recent score list
      *
@@ -56,9 +62,6 @@ public class ScoreList implements Parcelable {
         topScoreList.add(new Score(score, name));
 
     }
-
-    //seems like useless code, to be deleted
-    public ScoreList(){}
 
     /**
      * getRecentScore: <br/>
