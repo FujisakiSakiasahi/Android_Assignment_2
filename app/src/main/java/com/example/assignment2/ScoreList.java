@@ -8,10 +8,21 @@ import java.sql.Array;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * ScoreList: <br/>
+ * - use to store a set of Score
+ */
 public class ScoreList implements Parcelable {
     private List<Score> recentScoreList = new ArrayList<Score>();
     private List<Score> topScoreList = new ArrayList<Score>();
 
+    /**
+     * addRecentScore: <br/>
+     * - use to add a score to the recent score list
+     *
+     * @param score final score of the game
+     * @param name player name
+     */
     public void addRecentScore(int score, String name) {
         Score score0 = new Score(score, name);
 
@@ -22,6 +33,13 @@ public class ScoreList implements Parcelable {
         }
     }
 
+    /**
+     * addTopScore: <br/>
+     * - use to add a score to the top score list
+     *
+     * @param score final score of the game
+     * @param name player name
+     */
     public void addTopScore(int score, String name){
         Score score0 = new Score(score, name);
 
@@ -41,8 +59,16 @@ public class ScoreList implements Parcelable {
 
     }
 
+    //seems like useless code, to be deleted
     public ScoreList(){}
 
+    /**
+     * getRecentScore: <br/>
+     * - use to get a specific score from the recent score list
+     *
+     * @param index the position of the score in the list
+     * @return the score
+     */
     public int getRecentScore(int index) {
         if(index+1 <= recentScoreList.size()){
             return recentScoreList.get(index).getScore();
@@ -50,48 +76,12 @@ public class ScoreList implements Parcelable {
         return -1;
     }
 
-    public String getRecentName(int index) {
-        if(index+1 <= recentScoreList.size()){
-            return recentScoreList.get(index).getName();
-        }
-        return "RECORD NOT FOUND";
-    }
-
-    public int getRecentLength(){
-        return recentScoreList.size();
-    }
-
-    public int getTopScore(int index) {
-        if(index+1 <= topScoreList.size()){
-            return topScoreList.get(index).getScore();
-        }
-        return -1;
-    }
-
-    public String getTopName(int index) {
-        if(index+1 <= topScoreList.size()){
-            return topScoreList.get(index).getName();
-        }
-        return "RECORD NOT FOUND";
-    }
-
-    public int getTopLength(){
-        return topScoreList.size();
-    }
-
-    public ArrayList getTopScores(){
-        ArrayList<String> post = new ArrayList<>();
-
-        if(getTopLength() == 0){
-            return post;
-        }else{
-            for (int i = 0; i < getTopLength(); i++){
-                post.add("<b>" + topScoreList.get(i).getName() + "</b> \n" + topScoreList.get(i).getScore());
-            }
-            return post;
-        }
-    }
-
+    /**
+     * getRecentScores: <br/>
+     * - use to get the list of scores from the recent score list
+     *
+     * @return list of the scores
+     */
     public ArrayList getRecentScores(){
         ArrayList<String> post = new ArrayList<>();
 
@@ -105,17 +95,112 @@ public class ScoreList implements Parcelable {
         }
     }
 
+    /**
+     * getRecentName: <br/>
+     * - use to get a specific name from the recent score list
+     *
+     * @param index the position of the name in the list
+     * @return player name
+     */
+    public String getRecentName(int index) {
+        if(index+1 <= recentScoreList.size()){
+            return recentScoreList.get(index).getName();
+        }
+        return "RECORD NOT FOUND";
+    }
+
+    /**
+     * getRecentLength: <br/>
+     * - use to get the length of the recent score list
+     *
+     * @return the length of the list
+     */
+    public int getRecentLength(){
+        return recentScoreList.size();
+    }
+
+    /**
+     * getTopScore: <br/>
+     * - use to get a specific score from the top score list
+     *
+     * @param index the position of the score in the list
+     * @return the score
+     */
+    public int getTopScore(int index) {
+        if(index+1 <= topScoreList.size()){
+            return topScoreList.get(index).getScore();
+        }
+        return -1;
+    }
+
+    /**
+     * getTopScores: <br/>
+     * - use to get the list of the scores from the top score list
+     *
+     * @return list of the scores
+     */
+    public ArrayList getTopScores(){
+        ArrayList<String> post = new ArrayList<>();
+
+        if(getTopLength() == 0){
+            return post;
+        }else{
+            for (int i = 0; i < getTopLength(); i++){
+                post.add("<b>" + topScoreList.get(i).getName() + "</b> \n" + topScoreList.get(i).getScore());
+            }
+            return post;
+        }
+    }
+
+    /**
+     * getTopName: <br/>
+     * - use ot get a specific name from the top score list
+     *
+     * @param index the position of the name in the list
+     * @return player name
+     */
+    public String getTopName(int index) {
+        if(index+1 <= topScoreList.size()){
+            return topScoreList.get(index).getName();
+        }
+        return "RECORD NOT FOUND";
+    }
+
+    /**
+     * getTopLength: <br/>
+     * - use to get the length of the top score list
+     *
+     * @return the length of the list
+     */
+    public int getTopLength(){
+        return topScoreList.size();
+    }
+
+    /**
+     * describeContents: <br/>
+     * - ______
+     *
+     * @return ______
+     */
     @Override
     public int describeContents() {
         return 0;
     }
 
+    /**
+     * writeToParcel: <br/>
+     * - ______
+     *
+     * @param dest ______
+     * @param flags _____
+     */
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeList(this.recentScoreList);
         dest.writeList(this.topScoreList);
     }
 
+    //______________
     public static final Parcelable.Creator<ScoreList> CREATOR = new Parcelable.Creator<ScoreList>() {
         public ScoreList createFromParcel(Parcel in) {
             return new ScoreList(in);
@@ -126,6 +211,12 @@ public class ScoreList implements Parcelable {
         }
     };
 
+    /**
+     * Score: <br/>
+     * - ______
+     *
+     * @param in __________
+     */
     private ScoreList(Parcel in) {
         in.readList(recentScoreList, ScoreList.class.getClassLoader());
         in.readList(topScoreList, ScoreList.class.getClassLoader());
