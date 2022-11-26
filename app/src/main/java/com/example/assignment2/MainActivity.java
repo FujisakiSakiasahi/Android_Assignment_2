@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private static boolean soundEffectOnOFF;
     private static int soundEffectVolume;
 
+    // declare animations
     Animation scaleUp, scaleDown;
 
     @Override
@@ -91,9 +92,9 @@ public class MainActivity extends AppCompatActivity {
         binding.buttonClick.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                if(motionEvent.getAction() == MotionEvent.ACTION_DOWN){
+                if(motionEvent.getAction() == MotionEvent.ACTION_DOWN){ // on button press, button scaled down
                     binding.buttonClick.startAnimation(scaleDown);
-                }else if(motionEvent.getAction() == MotionEvent.ACTION_UP){
+                }else if(motionEvent.getAction() == MotionEvent.ACTION_UP){ // on button release, button scaled back to normal
                     binding.buttonClick.setAnimation(scaleUp);
                 }
 
@@ -107,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
 
     }//end onCreate
 
-    private void loadAnimation() {
+    private void loadAnimation() { // just loads animation from anim file
         scaleUp = AnimationUtils.loadAnimation(this, R.anim.scale_up);
         scaleDown = AnimationUtils.loadAnimation(this, R.anim.scale_down);
     }

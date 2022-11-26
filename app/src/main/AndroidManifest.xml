@@ -13,6 +13,8 @@
         android:theme="@style/Theme.Assignment2"
         tools:targetApi="31">
 
+        <!--@style/newActionBar is a custom style that makes the activity grey with custom imported font, also remove animation when switching activities-->
+        <!--@style/noAnimation is a custom style that removes ActionBar and also removes animation when switching between activity-->
         <activity
             android:name=".MainActivity"
             android:exported="true"
