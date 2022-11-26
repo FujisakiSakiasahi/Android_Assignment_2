@@ -2,6 +2,7 @@ package com.example.assignment2;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ public class ScoreList implements Parcelable {
         Score score0 = new Score(score, name);
 
         recentScoreList.add(0, score0);
+        //Log.d("Score", "Print 1 ");
 
         if (recentScoreList.size() > 10) {
             recentScoreList.remove(9);
@@ -89,7 +91,7 @@ public class ScoreList implements Parcelable {
         if(getTopLength() == 0){
             return post;
         }else{
-            for (int i = 0; i<10; i++){
+            for (int i = 0; i < getRecentLength(); i++){
                 post.add(recentScoreList.get(i).getName() + "\n" + recentScoreList.get(i).getScore());
             }
             return post;

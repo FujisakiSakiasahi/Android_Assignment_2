@@ -7,14 +7,19 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import com.example.assignment2.databinding.ActivityMainBinding;
 
 import java.io.File;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity<pricate> extends AppCompatActivity {
     //binding declaration
     private ActivityMainBinding binding = null;
 
@@ -38,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
     MediaPlayer mediaPlayer = null;
     private static boolean soundEffectOnOFF;
     private static int soundEffectVolume;
+
+    Animation scaleUp, scaleDown;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +71,9 @@ public class MainActivity extends AppCompatActivity {
         //load the score list
         loadScoreList();
 
+        // load button scale animation
+        loadAnimation();
+
         //game function piece
         binding.buttonClick.setOnClickListener(view -> {
             incrementScore();
@@ -78,11 +88,29 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        binding.buttonClick.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if(motionEvent.getAction() == MotionEvent.ACTION_DOWN){
+                    binding.buttonClick.startAnimation(scaleDown);
+                }else if(motionEvent.getAction() == MotionEvent.ACTION_UP){
+                    binding.buttonClick.setAnimation(scaleUp);
+                }
+
+                return false;
+            }
+        });
+
         if (!gameStarted) {
             resetGame();
         }//end if
 
     }//end onCreate
+
+    private void loadAnimation() {
+        scaleUp = AnimationUtils.loadAnimation(this, R.anim.scale_up);
+        scaleDown = AnimationUtils.loadAnimation(this, R.anim.scale_down);
+    }
 
     @Override
     protected void onStop() {
@@ -170,6 +198,9 @@ public class MainActivity extends AppCompatActivity {
      * - use to load the score list
      */
     public void loadScoreList(){
+        // here1
+        // Log.d("score", "loadScoreList: Called");
+
         //initialize the file handler: for recent score file name
         fileHandler = new FileHandler(getApplicationContext(), RECENT_SCORE_FILE_NAME);
 
@@ -213,6 +244,8 @@ public class MainActivity extends AppCompatActivity {
      * @param score final score of the game
      */
     public void saveScore(String name, int score){ //save score into ScoreList object
+        // here2
+        // Log.d("score", "saveScore: Called");
         scoreList.addRecentScore(score, name);
         scoreList.addTopScore(score, name);
     }
