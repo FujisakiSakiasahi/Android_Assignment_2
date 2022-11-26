@@ -24,6 +24,9 @@ public class LeaderboardActivity extends AppCompatActivity {
         binding = LeaderboardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        //set onclick listener for the button to end this activity
+        binding.buttonBackLb.setOnClickListener(view -> finish());
+
         //get the pass in intent
         Intent intent = getIntent();
 

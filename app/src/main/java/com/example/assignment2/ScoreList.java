@@ -87,7 +87,7 @@ public class ScoreList implements Parcelable {
             return post;
         }else{
             for (int i = 0; i<10; i++){
-                post.add("<b>" + recentScoreList.get(i).getName() + "</b> \n" + recentScoreList.get(i).getScore());
+                post.add(recentScoreList.get(i).getName() + "\n" + recentScoreList.get(i).getScore());
             }
             return post;
         }
@@ -144,7 +144,7 @@ public class ScoreList implements Parcelable {
             return post;
         }else{
             for (int i = 0; i < getTopLength(); i++){
-                post.add("<b>" + topScoreList.get(i).getName() + "</b> \n" + topScoreList.get(i).getScore());
+                post.add(topScoreList.get(i).getName() + "\n" + topScoreList.get(i).getScore());
             }
             return post;
         }
