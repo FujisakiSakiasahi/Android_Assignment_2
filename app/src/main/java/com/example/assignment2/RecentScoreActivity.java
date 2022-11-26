@@ -7,7 +7,6 @@ import android.widget.ArrayAdapter;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.assignment2.databinding.LeaderboardBinding;
 import com.example.assignment2.databinding.RecentScoresBinding;
 
 public class RecentScoreActivity extends AppCompatActivity {

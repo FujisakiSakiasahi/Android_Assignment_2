@@ -2,9 +2,7 @@ package com.example.assignment2;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
 
-import java.sql.Array;
 import java.util.List;
 import java.util.ArrayList;
 
