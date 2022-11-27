@@ -68,6 +68,8 @@ public class SettingActivity extends AppCompatActivity {
             savingSettingStatus();
             //toast the success message
             Toast.makeText(this, getString(R.string.setting_toast_set_default), Toast.LENGTH_SHORT).show();
+
+            gotChanges = false;
         });
 
         //set the onclick listener to the save button
@@ -76,6 +78,8 @@ public class SettingActivity extends AppCompatActivity {
             savingSettingStatus();
             //toast the success message
             Toast.makeText(this, getString(R.string.setting_toast_save), Toast.LENGTH_SHORT).show();
+
+            gotChanges = false;
         });
 
         //set the onclick listener to the close button
@@ -89,6 +93,7 @@ public class SettingActivity extends AppCompatActivity {
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        gotChanges =false;
                         finish();
                     }
                 });
